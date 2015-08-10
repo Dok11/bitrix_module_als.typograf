@@ -13,28 +13,24 @@ CModule::IncludeModule("als.typograf");
 
 $sContentIn = $_REQUEST["CONTENT"];
 
-
 if(!$sContentIn) {
 	$arResult = Array(
 		"ERROR"	=> true,
 		"MSG"	=> "Требуется входной параметр CONTENT"
 	);
 
+	header('Content-Type: application/json');
 	$jsonResult = json_encode($arResult);
-
-	echo $jsonResult;
 	return;
 }
 
 
 $sContentOut = ALSTypograf::Format($sContentIn);
-
 $arResult = Array(
 	"RESULT" => $sContentOut
 );
-
 $jsonResult = json_encode($arResult);
 
-
+header('Content-Type: application/json');
 echo $jsonResult;
 return;
