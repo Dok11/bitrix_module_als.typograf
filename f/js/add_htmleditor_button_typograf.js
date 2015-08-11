@@ -17,17 +17,14 @@ BX.addCustomEvent('OnEditorInitedBefore',function(toolbar){
 			$.ajax({
 				type:		"POST",
 				url:		sAjaxPath,
+				dataType: 'json',
 				data:		({CONTENT: content}),
 				success:	function(data) {
-					var arResult = JSON.parse(data);
-
-					if(typeof arResult === 'object') {
-						_this.SetContent(arResult.RESULT, true);
+					if(typeof data === 'object') {
+						_this.SetContent(data.RESULT, true);
 						_this.ReInitIframe();
-
 					} else {
 						console.log("Ошибка парсинга данных: ", data);
-
 					}
 				},
 				error:		function() {
