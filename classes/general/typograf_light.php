@@ -117,7 +117,21 @@ class ALSTypografLight {
 
 
 	private function setNobr() {
-		$pattern = '/((\+\d\s|\d)?(\(?\d{3,4}\)?[\- ]?)?[\d\-]{7,10}\d)/';
+
+		/**
+		 * @var string - Телефонные номера
+		 */
+		$patternPhone = '/((\+\d\s|\d)?(\(?\d{3,4}\)?[\- ]?)?[\d\-]{7,10}\d)/';
+
+		/**
+		 * @var string - Регулярка на диапазоны времени вроде 9:00–18:00, 9:00–14:00
+		 */
+		$patternTimes = '/(\d{1,2}\:\d{1,2}(–|-|—)\d{1,2}\:\d{1,2})/';
+
+		$pattern = Array(
+			$patternPhone,
+			$patternTimes,
+		);
 
 		$this->text = preg_replace($pattern, '<nobr>$1</nobr>', $this->text);
 
